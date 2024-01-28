@@ -34,14 +34,13 @@ class _InvitesScreenState extends State<InvitesScreen> {
             itemBuilder: (context, index) {
               final inviteData = invites[index].data() as Map<String, dynamic>;
               return _buildInviteCard(
-                  inviteData['senderUserId'],
-                  inviteData['recipientUserId'],
-                  inviteData['status'],
-                  inviteData['name'],
-                  inviteData['surname'],
-                  invites[index].id,
-                  inviteData['senderName'],
-                  inviteData['senderSurname']);
+                inviteData['senderUserId'],
+                inviteData['recipientUserId'],
+                inviteData['status'],
+                inviteData['senderName'],
+                inviteData['senderSurname'],
+                invites[index].id,
+              );
             },
           );
         }
@@ -56,14 +55,11 @@ class _InvitesScreenState extends State<InvitesScreen> {
     String? name,
     String? surname,
     String inviteId,
-    String? senderName, // Added senderName
-    String? senderSurname, // Added senderSurname
   ) {
     return Card(
       margin: const EdgeInsets.all(8),
       child: ListTile(
-        title: Text(
-            'Invite from ${senderName ?? 'Unknown'} ${senderSurname ?? 'Unknown'}'),
+        title: Text('Invite from ${name ?? 'Unknown'} ${surname ?? 'Unknown'}'),
         subtitle: Text('Status: $status'),
         trailing: status == 'pending'
             ? Row(
@@ -120,7 +116,7 @@ class _InvitesScreenState extends State<InvitesScreen> {
               onPressed: () {
                 Navigator.of(context).pop(); // Close the alert
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
